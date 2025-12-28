@@ -1,5 +1,5 @@
 const express =require('express');
-const {createTodo}=require('./types')
+const {createTodo,updataTodo}=require('./types')
 const {todo}=require('./db')
 const app=express();
 
@@ -28,10 +28,27 @@ res.json({
 
 })
 
-app.get("/todos",function(req ,res){
+app.get("/todos",async function(req ,res){
+const Todos=await todo.find({})
+console.log(Todos)
+res.json({
+    Todos
+})
 
 })
 
-app.put("/completed",function(req,res){
+app.put("/completed",async function(req,res){
+const updatepayload=req.body;
+const verifypayload=updataTodo.safeParse(updatepayload)
+if(!verifypayload.success){
+    res.status(411).json({
+        msg:"wrong input"
+    })
+}
 
+await todo.update({
+    _id:req.body
+},{
+    completed:true
+})
 })
