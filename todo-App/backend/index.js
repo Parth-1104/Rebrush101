@@ -2,8 +2,10 @@ const express =require('express');
 const {createTodo,updataTodo}=require('./types')
 const {todo}=require('./db')
 const app=express();
+const cors=require('cors')
 
 app.use(express.json())
+app.use(cors())
 
 
 app.post("/todo",async function(req ,res){

@@ -8,6 +8,6 @@ const updateTodo=zod.object({
     id:zod.string(),
 })
 
-module.exports({
+module.exports=({
     createTodo,updateTodo
 })

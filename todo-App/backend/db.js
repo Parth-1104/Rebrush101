@@ -1,6 +1,6 @@
 const mongoose=require('mongoose')
 
-mongoose.connect(" ")
+mongoose.connect("mongodb+srv://singhparth427:parth427@cluster0.632ns.mongodb.net/todo")
 
 const todoSchema=mongoose.Schema({
     title:String,
@@ -8,8 +8,8 @@ const todoSchema=mongoose.Schema({
     completed:Boolean
 })
 
-const todo=mongoose.model(todoSchema);
+const todo=mongoose.model('todos',todoSchema);
 
-module.exports({
+module.exports=({
     todo
 })

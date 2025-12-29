@@ -11,12 +11,13 @@ function App() {
   return (
     <>
      <CreateTodo/>
-     <Todos todos={[
+
+     {/* <Todos todos={[
       {title:"Welllo",
       description:"hola amigo ",
       completed:false
       }
-     ]}/>
+     ]}/> */}
     </>
   )
 }

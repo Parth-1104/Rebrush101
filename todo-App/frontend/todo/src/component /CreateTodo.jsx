@@ -1,8 +1,8 @@
 export function  CreateTodo(){
-return 
+return (
 <div>
-    <input type="text" placeholder="Title" />
-    <input type="text" placeholder="Description" />
-    <button>Add todo </button>
+    <input type="text" placeholder="Title" /><br />
+    <input type="text" placeholder="Description" /><br />
+    <button>Add todo </button><br />
 </div>
-}
+)}
