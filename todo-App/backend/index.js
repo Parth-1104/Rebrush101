@@ -52,3 +52,6 @@ await todo.update({
     completed:true
 })
 })
+
+
+app.listen(3000)
