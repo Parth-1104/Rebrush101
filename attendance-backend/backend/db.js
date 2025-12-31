@@ -1,5 +1,19 @@
-const mongoose=require('mongoose')
-mongoose.connect(process.env.MONGODB_URL)
+
+require("dotenv").config();
+const mongoose = require("mongoose");
+
+// -------------------- DB CONNECT --------------------
+if (!process.env.MONGODB_URL) {
+  throw new Error("MONGODB_URL is missing");
+}
+
+mongoose
+  .connect(process.env.MONGODB_URL)
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => {
+    console.error("MongoDB connection error:", err);
+    process.exit(1);
+  });
 
 const UserSchema= new mongoose.Schema({
     name:String,
@@ -31,18 +45,18 @@ const ClassSchema=new mongoose.Schema({
 const AttendanceSchema= new mongoose.Schema({
     classId:{
         type:mongoose.Types.ObjectId,
-        ref:"class"
+        ref:"Class"
     },
     studentId:{
         type:mongoose.Types.ObjectId,
-        ref:"user"
+        ref:"User"
     },
 
 })
 
 const UserModel=mongoose.model("User",UserSchema)
-const ClassModel=mongoose.model("class",ClassSchema)
-const AttendanceModel=mongoose.model("attend",AttendanceSchema)
+const ClassModel=mongoose.model("Class",ClassSchema)
+const AttendanceModel=mongoose.model("Attend",AttendanceSchema)
 
 
 module.exports=({
