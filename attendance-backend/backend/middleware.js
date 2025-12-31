@@ -26,4 +26,13 @@ const authMiddleware = (req, res, next) => {
   }
 }
 
-module.exports = { authMiddleware }
+const TeacherRoleMiddleware=(req,res,next)=>{
+if(!req.role||req.role!=teacher){
+    res.status(403).json({
+message:"Teacher role required"})
+return
+}
+next()
+}
+
+module.exports = { authMiddleware ,TeacherRoleMiddleware}

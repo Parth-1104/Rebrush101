@@ -31,7 +31,7 @@ const UserSchema= new mongoose.Schema({
   //
 
 const ClassSchema=new mongoose.Schema({
-    classname:String,
+    className:String,
     teacherId:{
         type:mongoose.Types.ObjectId,
         ref:'User'

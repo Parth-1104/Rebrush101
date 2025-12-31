@@ -1,8 +1,8 @@
 const express=require('express')
-const { SignUpSchema, LoginSchema } = require('./types')
+const { SignUpSchema, LoginSchema, ClassSchema } = require('./types')
 const { UserModel } = require('./db')
 const jwt= require('jsonwebtoken')
-const { authMiddleware } = require('./middleware')
+const { authMiddleware, TeacherRoleMiddleware } = require('./middleware')
 require("dotenv").config();
 
 const app=express()
@@ -118,5 +118,37 @@ app.get('/auth/me',authMiddleware,async (req,res)=>{
     )
 })
 
+
+app.post('/Class',authMiddleware,TeacherRoleMiddleware,async(req,res)=>{
+    const {success,data}=ClassSchema.safeParse(req.body)
+    if(!success)
+        {
+            res.status(400).json(
+                {
+                    "success": false,
+                    "error": "Invalid request schema"
+                  }
+            )
+            return
+        }
+    
+    const classdb=ClassSchema.create(
+        {
+            className:data.className,
+            teacherId:req.userId,
+            studentIds:[]
+        }
+        
+    )
+    res.json({
+        "success": true,
+        "data": {
+          "_id": classdb._id,
+          "className": classdb.className,
+          "teacherId": classdb.teacherId,
+          "studentIds": []
+        }
+      })
+})
 
 app.listen(3000)

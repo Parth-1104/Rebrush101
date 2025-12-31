@@ -17,6 +17,12 @@ const LoginSchema=zod.object(
       }
 )
 
+const ClassSchema=zod.object(
+    {
+        className: zod.string()
+      }
+)
+
 module.exports=({
-    SignUpSchema,LoginSchema
+    SignUpSchema,LoginSchema,ClassSchema
 })
