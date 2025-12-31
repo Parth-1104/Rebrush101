@@ -71,6 +71,7 @@ if(!userdb||data.password!=userdb.password)
             "error": "Invalid email or password"
           }
     )
+    return
 }
 
 const token=jwt.sign({
@@ -79,9 +80,18 @@ const token=jwt.sign({
 
 },process.env.jwt_password)
 
-
-
+res.json(
+    {
+        "success": true,
+        "data": {
+          "token": token
+        }
+      }
+)
 })
+
+
+app.get()
 
 
 app.listen(3000)
