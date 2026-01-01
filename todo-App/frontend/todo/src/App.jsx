@@ -6,18 +6,18 @@ import { CreateTodo } from './component /CreateTodo'
 import { Todos } from './component /Todos'
 
 function App() {
-  const [count, setCount] = useState(0)
+  // const [todos, setTodo] = useState([]);
+
+
+  // fetch("http://localhost:3000/todos").then(async function(res){
+  //   const json=await res.json()
+  //   setTodo(json.Todos)
+  // })
 
   return (
     <>
      <CreateTodo/>
-
-     {/* <Todos todos={[
-      {title:"Welllo",
-      description:"hola amigo ",
-      completed:false
-      }
-     ]}/> */}
+     {/* <Todos todos={todos}/> */}
     </>
   )
 }
