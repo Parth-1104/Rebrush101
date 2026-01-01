@@ -1,25 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { CreateTodo } from './component /CreateTodo'
-import { Todos } from './component /Todos'
+import { useState, useEffect } from 'react';
+import { CreateTodo } from './component /CreateTodo';
+import { Todos } from './component /Todos';
 
 function App() {
-  const [todos, setTodo] = useState([]);
+  const [todos, setTodos] = useState([]);  // Fixed: setTodos
 
-
-  fetch("http://localhost:3000/todos").then(async function(res){
-    const json=await res.json()
-    setTodo(json.Todos)
-  })
+  useEffect(() => {
+    fetch("http://localhost:3000/todos")
+      .then(res => res.json())
+      .then(data => setTodos(data.Todos || []))  // Handle json.Todos safely
+      .catch(err => console.error(err));
+  }, []);  // Empty deps = run once
 
   return (
     <>
-     <CreateTodo/>
-     <Todos todos={todos}/>
+      <CreateTodo />
+      <Todos initialTodos={todos} />  {/* Fixed: initialTodos */}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
